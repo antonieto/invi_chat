@@ -12,31 +12,40 @@ function App() {
 
         <div className="window-container"> 
           
-          <Aside/>
-          
-          <div> 
-            <nav> 
-              <ul> 
-                <Link to="/"> Inicio </Link>
-              </ul>
-              <ul> 
-                <Link to="/Test"> Test </Link>
-              </ul>
-              <ul> 
-                <Link to="/Dashboard"> Dashboard </Link>
-              </ul>
-            </nav>
+          <div className="border-end aside"> 
+            
+            <Aside/>
+            
+            <div> 
+              <nav> 
+                <ul> 
+                  <Link to="/"> Inicio </Link>
+                </ul>
+                <ul> 
+                  <Link to="/Test"> Test </Link>
+                </ul>
+                <ul> 
+                  <Link to="/Dashboard"> Dashboard </Link>
+                </ul>
+              </nav>
+            </div> 
+
           </div>
+
+          <Switch> 
+            <Route path="/Test" exact component={()=> <Test/> } > 
+              <Test/>
+            </Route>
+          </Switch>
+
         </div>
         
+        
+
+
       </div> 
 
-        <Switch> 
-          <Route path="/Test" exact component={()=> <Test/> } > 
-            <Test/>
-          </Route>
-        </Switch>
-
+        
       </Router>
     </>
     
