@@ -6,7 +6,8 @@ import Dashboard from './components/Dashboard';
 import firebase from 'firebase'; 
 import auth from 'firebase/auth'; 
 import { useAuthState } from 'react-firebase-hooks/auth'; 
-import Login from './components/Login';
+import Login from './components/Login'; 
+import Formulario from './components/Formulario';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCyddp2vs8JJfytLxDy5t3tQswv1TT1WwE",
@@ -22,7 +23,7 @@ function App() {
   
   // firebase.initializeApp(firebaseConfig);
   
-  let user = null; 
+  let user = true; 
 
   if(!user) return ( 
     <Login/>
@@ -51,6 +52,9 @@ function App() {
                 <ul className="btn btn-secondary borded-rounded py-2 boton w-100"> 
                   <Link to="/Dashboard" className="link"> Dashboard </Link>
                 </ul>
+                <ul className="btn btn-secondary borded-rounded py-2 boton w-100"> 
+                  <Link to="/Formulario" className="link"> Formulario </Link>
+                </ul>
               </nav>
             </div> 
 
@@ -62,6 +66,9 @@ function App() {
             </Route> 
             <Route path="/Dashboard" exact component={()=> <Dashboard/> }> 
               <Dashboard/>
+            </Route>
+            <Route path="/Formulario" exact component={()=> <Formulario/> }> 
+              <Formulario/>
             </Route>
           </Switch>
 
