@@ -5,7 +5,8 @@ import Aside from './components/Aside';
 import Dashboard from './components/Dashboard';
 import firebase from 'firebase'; 
 import auth from 'firebase/auth'; 
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { useAuthState } from 'react-firebase-hooks/auth'; 
+import Login from './components/Login';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCyddp2vs8JJfytLxDy5t3tQswv1TT1WwE",
@@ -21,12 +22,10 @@ function App() {
   
   // firebase.initializeApp(firebaseConfig);
   
-  let user = true; 
+  let user = null; 
 
   if(!user) return ( 
-    <div> 
-        <h1> Login my gee! </h1>
-    </div>
+    <Login/>
   )
 
   return (
