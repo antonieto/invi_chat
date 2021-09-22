@@ -24,5 +24,26 @@ code {
   margin-right: 2rem; 
   padding: 2rem; 
   max-width: 12rem; 
-  background-color: rgb(168, 168, 168);
+  background-color: rgb(16, 56, 58);
+} 
+
+.boton { 
+  font-size: 1.2rem; 
+} 
+.link { 
+  color: white; 
+  text-decoration: none; 
+  transition: 3ms color ease-in; 
+  font-weight: 700;
+} 
+
+.link:hover { 
+  color: gray;
+} 
+.evento { 
+  height: 25rem;
+  max-height: 25rem; 
+  width: 25rem; 
+  margin-left: 2rem; 
+  margin-bottom: 2rem;
 }

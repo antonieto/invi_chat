@@ -2,6 +2,7 @@ import React from 'react'
 import Test from './components/Test';
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom"; 
 import Aside from './components/Aside';
+import Dashboard from './components/Dashboard';
 
 
 function App() {
@@ -17,15 +18,15 @@ function App() {
             <Aside/>
             
             <div> 
-              <nav> 
-                <ul> 
-                  <Link to="/"> Inicio </Link>
+              <nav className="navegacion"> 
+                <ul className="btn btn-secondary borded-rounded py-2 boton w-100"> 
+                  <Link to="/" className="link"> Inicio </Link>
                 </ul>
-                <ul> 
-                  <Link to="/Test"> Test </Link>
+                <ul className="btn btn-secondary borded-rounded py-2 boton w-100"> 
+                  <Link to="/Test" className="link"> Test </Link>
                 </ul>
-                <ul> 
-                  <Link to="/Dashboard"> Dashboard </Link>
+                <ul className="btn btn-secondary borded-rounded py-2 boton w-100"> 
+                  <Link to="/Dashboard" className="link"> Dashboard </Link>
                 </ul>
               </nav>
             </div> 
@@ -35,6 +36,9 @@ function App() {
           <Switch> 
             <Route path="/Test" exact component={()=> <Test/> } > 
               <Test/>
+            </Route> 
+            <Route path="/Dashboard" exact component={()=> <Dashboard/> }> 
+              <Dashboard/>
             </Route>
           </Switch>
 
