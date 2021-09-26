@@ -1,4 +1,4 @@
-export default {
+module.exports =  {
     apiKey: "AIzaSyCyddp2vs8JJfytLxDy5t3tQswv1TT1WwE",
     authDomain: "invi-chat.firebaseapp.com",
     projectId: "invi-chat",

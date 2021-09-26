@@ -8,8 +8,8 @@ const { signUp } = require('./handlers/users');
 // User routes 
 app.post('/signup', signUp);
 
-app.get('/get', (req, res)=> { 
+// app.get('/get', (req, res)=> { 
     
-})
+// })
 
 exports.api = functions.https.onRequest(app);
