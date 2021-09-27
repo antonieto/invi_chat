@@ -72,27 +72,31 @@ exports.logIn = (req, res)=>{
     const user = { 
         email: req.body.email, 
         password: req.body.password
-    }
+    } 
+    console.log(user.email, user.password);
     
     // Primero se validan los datos 
     const { errors, valid } = validateLogIn(user); 
     if(!valid) return res.status(400).json(errors); 
 
+    console.log("Here");
+
     //Login validado, proceder a autenticar 
     firebase.auth().signInWithEmailAndPassword(user.email, user.password) 
-    .then(data => { 
-        return data.user.getIdToken();
-    })
-    .then( idToken => {
-        return res.status(200).json({token: idToken}); 
-    }) 
-    .catch(err => {
-        if(err. code === 'auth/wrond-password'){
-            return res.status(403).json({error: 'Incorrect password'});
-        } else { 
-            console.error(err.code);
-            return res.status(500).json({error: err.code});
-        }
-    })
+        .then(data => { 
+            console.log("here");
+            return data.user.getIdToken();
+        })
+        .then( token => { 
+            return res.status(200).json({token}); 
+        }) 
+        .catch(err => {
+            if(err. code === 'auth/wrond-password'){
+                return res.status(403).json({error: 'Incorrect password'});
+            } else { 
+                console.error(err.code);
+                return res.status(500).json({error: err.code});
+            }
+        })
 
 }
