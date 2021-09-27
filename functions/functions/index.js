@@ -7,6 +7,7 @@ const { signUp } = require('./handlers/users');
 
 // User routes 
 app.post('/signup', signUp);
+// app.post('/login', signUp);
 
 // app.get('/get', (req, res)=> { 
     
