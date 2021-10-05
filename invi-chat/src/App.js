@@ -7,7 +7,7 @@ import firebase from 'firebase';
 import auth from 'firebase/auth'; 
 import { useAuthState } from 'react-firebase-hooks/auth'; 
 import Login from './components/Login'; 
-import Formulario from './components/Formulario';
+import Formulario from './pages/SignUp';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCyddp2vs8JJfytLxDy5t3tQswv1TT1WwE",
