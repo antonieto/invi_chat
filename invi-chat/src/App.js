@@ -27,11 +27,14 @@ function App() {
   // const [users, setUsers] = useState([]);
 
   // State de user
+  const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
 
-  if (!user)
+  if (!user) {
     // Login here
-    return <Login setUser={setUser} />;
+    return <Login setUser={setUser} setToken={setToken} />;
+  }
+  return <h1> You are logged in, {user.handle} </h1>;
 }
 
 export default App;
