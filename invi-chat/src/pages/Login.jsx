@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Error from "../components/Error";
 import axios from "axios";
 
 const Login = ({ setUser, setToken }) => {
@@ -7,7 +8,7 @@ const Login = ({ setUser, setToken }) => {
     password: "",
   });
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState("");
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -15,24 +16,7 @@ const Login = ({ setUser, setToken }) => {
     });
   };
 
-  const handleFormSubmit = (ev) => {
-    ev.preventDefault();
-    setLoading(true);
-    // Validate data
-    if (formData.email.trim("") === "") {
-      setErrors([...errors, "Email must not be empty"]);
-    }
-    if (formData.password.trim("") === "") {
-      setErrors([...errors, "Password must not be empty"]);
-    }
-
-    if (errors.length !== 0) {
-      // User will still be null
-      return;
-    }
-    // No
-    setErrors([]);
-    // Call backend
+  const callLogin = () => {
     axios
       .post("/login", {
         Headers: {
@@ -47,8 +31,29 @@ const Login = ({ setUser, setToken }) => {
         setUser(response.data.data);
       })
       .catch((err) => {
-        console.error(err);
+        setLoading(false);
+        if (err.response.status === 403) {
+          setErrors("Incorrect passowrd or email");
+        } else {
+          setErrors("An error ocurred");
+        }
       });
+  };
+
+  const handleFormSubmit = (ev) => {
+    ev.preventDefault();
+    setErrors("");
+    setLoading(true);
+    // Validate data
+    if (!formData.email.trim() || !formData.password.trim()) {
+      setErrors("Email and password must not be empty");
+      setLoading(false);
+      return;
+    }
+
+    setErrors("");
+    callLogin();
+    // Call backend
   };
   if (loading) {
     return <div className="loader"> Loading... </div>;
@@ -87,6 +92,7 @@ const Login = ({ setUser, setToken }) => {
             value="submit"
             name=""
           />
+          {errors ? <Error message={errors} /> : null}
         </form>
       </div>
     </div>
