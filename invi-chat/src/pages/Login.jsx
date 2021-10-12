@@ -55,7 +55,7 @@ const Login = ({ setUser, setToken }) => {
   }
   return (
     <div className="col">
-      <div className="card row position-absolute top-50 start-50 translate-middle shadow p-3 mb-5 bg-body rounded">
+      <div className="card row center-item translate-middle shadow p-3 mb-5 bg-body rounded">
         <h1 className="fs-1 text-center">Login</h1>
         <form
           className="col"
