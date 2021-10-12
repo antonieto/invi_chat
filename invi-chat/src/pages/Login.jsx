@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Error from "../components/Error";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Login = ({ setUser, setToken }) => {
   const [formData, setFormData] = useState({
@@ -94,6 +95,9 @@ const Login = ({ setUser, setToken }) => {
           />
           {errors ? <Error message={errors} /> : null}
         </form>
+        <Link to="/" className="btn btn-danger">
+          &laquo; Back
+        </Link>
       </div>
     </div>
   );
