@@ -41,5 +41,5 @@
     "firebase": "^8.8.1",
     "react-firebase-hooks": "^3.0.4"
   },
-  "proxy": "https://us-central1-invi-chat.cloudfunctions.net/api"
+  "proxy": "http://localhost:5001/invi-chat/us-central1/api"
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Error from "../components/Error";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const Login = ({ setUser, setToken }) => {
   const [formData, setFormData] = useState({
@@ -10,6 +10,7 @@ const Login = ({ setUser, setToken }) => {
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState("");
+  let history = useHistory();
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -30,9 +31,14 @@ const Login = ({ setUser, setToken }) => {
       .then((response) => {
         setToken(response.data.token);
         setUser(response.data.data);
+        history.push("/");
       })
       .catch((err) => {
         setLoading(false);
+        setFormData({
+          email: "",
+          password: "",
+        });
         if (err.response.status === 403) {
           setErrors("Incorrect passowrd or email");
         } else {
@@ -48,6 +54,10 @@ const Login = ({ setUser, setToken }) => {
     // Validate data
     if (!formData.email.trim() || !formData.password.trim()) {
       setErrors("Email and password must not be empty");
+      setFormData({
+        email: "",
+        password: "",
+      });
       setLoading(false);
       return;
     }
@@ -61,21 +71,18 @@ const Login = ({ setUser, setToken }) => {
   }
   return (
     <div className="col">
-      <div className="card row center-item translate-middle shadow p-3 mb-5 bg-body rounded">
+      <div className="card row center-item shadow p-3 mb-5 bg-body rounded">
         <h1 className="fs-1 text-center">Login</h1>
-        <form
-          className="col"
-          onSubmit={handleFormSubmit}
-          method="POST"
-          action="http://localhost:5001/invi-chat/us-central1/api/login"
-        >
+        <form className="col" onSubmit={handleFormSubmit} method="POST">
           <label className="row mb-3">
             Email:
             <input
               className="form-control"
               type="email"
               name="email"
+              value={formData.email}
               onChange={handleChange}
+              placeholder="Your e-mail"
             />
           </label>
           <label className="row mb-3">
@@ -84,18 +91,24 @@ const Login = ({ setUser, setToken }) => {
               className="form-control"
               type="password"
               name="password"
+              value={formData.password}
               onChange={handleChange}
+              placeholder="Your password"
             />
           </label>
-          <input
-            className="row mb-3 btn btn-primary"
-            type="submit"
-            value="submit"
-            name=""
-          />
-          {errors ? <Error message={errors} /> : null}
+          <div className="row">
+            <input
+              className="mx-0 mb-3 btn btn-block btn-info"
+              type="submit"
+              value="Login"
+              name=""
+            />
+          </div>
+          <div className="row">
+            {errors ? <Error message={errors} /> : null}
+          </div>
         </form>
-        <Link to="/" className="btn btn-danger">
+        <Link to="/" className="btn btn-outline-danger">
           &laquo; Back
         </Link>
       </div>

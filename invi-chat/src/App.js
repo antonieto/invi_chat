@@ -1,18 +1,31 @@
 import React, { useEffect, useState } from "react";
 import "axios";
 
-import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Link,
+  Switch,
+  Route,
+  useHistory,
+} from "react-router-dom";
 
 // Pages imports
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import NoUser from "./pages/NoUser";
 import SignUp from "./pages/SignUp.jsx";
+import Meeting from "./pages/Meeting";
 
 function App() {
   // State de user
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
+
+  let history = useHistory();
+
+  useEffect(() => {
+    console.log(history);
+  }, [user]);
 
   if (!user) {
     return (
@@ -36,9 +49,13 @@ function App() {
 
   return (
     <Router>
-      <div>
+      <Route path="/" exact>
         <Dashboard user={user} token={token} />
-      </div>
+      </Route>
+
+      <Route path="/meeting/:meetingId" exact>
+        <Meeting />
+      </Route>
     </Router>
   );
 }

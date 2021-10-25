@@ -12,6 +12,24 @@ code {
     monospace;
 }
 
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+ul {
+  margin: 0;
+}
+
 .window-container {
   display: flex;
   height: 100vh;
@@ -37,9 +55,8 @@ code {
   color: gray;
 }
 .evento {
-  height: 25rem;
-  max-height: 25rem;
-  width: 25rem;
+  height: 16rem;
+  width: 16rem;
   margin-left: 2rem;
   margin-bottom: 2rem;
 }
