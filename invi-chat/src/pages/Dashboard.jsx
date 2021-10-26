@@ -32,8 +32,8 @@ const Dashboard = ({ user, token }) => {
             ? null
             : meetings.docs.map((doc) => {
                 return (
-                  <Link to={`/meeting/${doc.id}`}>
-                    <Card info={doc.data()} key={doc.id} />
+                  <Link to={`/meeting/${doc.id}`} key={doc.id}>
+                    <Card info={doc.data()} />
                   </Link>
                 );
               })}

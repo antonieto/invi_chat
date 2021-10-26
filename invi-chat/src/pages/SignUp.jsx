@@ -43,7 +43,7 @@ const SignUp = ({ setToken, setUser }) => {
     setErrors("");
     callSignUp()
       .then((response) => {
-        if (response.status == 200) {
+        if (response.status === 200) {
           console.log(response);
           setToken(response.data.token);
           setUser(response.data.data);
@@ -51,7 +51,7 @@ const SignUp = ({ setToken, setUser }) => {
         }
       })
       .catch((err) => {
-        if (err.response.status == 400) {
+        if (err.response.status === 400) {
           setErrors("Email already in use");
           setLoading(false);
         } else if (err.response.data.error === "auth/email-already-in-use") {

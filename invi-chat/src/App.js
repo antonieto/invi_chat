@@ -41,8 +41,6 @@ function App() {
         </Route>
       </Router>
     );
-    // Login here
-    // return <Login setUser={setUser} setToken={setToken} />;
   }
 
   // Return app
@@ -54,7 +52,7 @@ function App() {
       </Route>
 
       <Route path="/meeting/:meetingId" exact>
-        <Meeting />
+        <Meeting token={token} user={user} />
       </Route>
     </Router>
   );

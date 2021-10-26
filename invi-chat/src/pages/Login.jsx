@@ -29,7 +29,7 @@ const Login = ({ setUser, setToken }) => {
         password: formData.password,
       })
       .then((response) => {
-        setToken(response.data.token);
+        setToken(response.data.token.trim());
         setUser(response.data.data);
         history.push("/");
       })
@@ -71,7 +71,7 @@ const Login = ({ setUser, setToken }) => {
   }
   return (
     <div className="col">
-      <div className="card row center-item shadow p-3 mb-5 bg-body rounded">
+      <div className="card row center-item shadow p-3 bg-body rounded">
         <h1 className="fs-1 text-center">Login</h1>
         <form className="col" onSubmit={handleFormSubmit} method="POST">
           <label className="row mb-3">
