@@ -60,7 +60,11 @@ const Meeting = ({ token, user }) => {
             className="collapse mb-2"
             style={{ display: show, width: "max-content" }}
           >
-            <MeetingInviForm meetingId={meetingId} token={token} />
+            <MeetingInviForm
+              meetingId={meetingId}
+              token={token}
+              handleToggle={handleToggle}
+            />
           </div>
 
           <div className="row">

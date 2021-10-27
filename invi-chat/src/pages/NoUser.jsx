@@ -35,7 +35,7 @@ const NoUser = () => {
                 What is Invi Chat?
               </h3>
             </div>
-            <div className="card-body">
+            <div className="card-body text-white">
               <p className="">
                 Invi Chat is an open source social media app developed using{" "}
                 <strong> React.js</strong> for the frontend and{" "}
