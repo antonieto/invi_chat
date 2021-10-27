@@ -9,7 +9,6 @@ import Loader from "./Loader";
 import axios from "axios";
 
 const Chat = ({ chatId, token, user }) => {
-
   // Component State
   const chatRef = db.collection(`/chats/${chatId}/messages`);
   const q = chatRef.orderBy("createdAt", "asc").limit(50);
@@ -21,18 +20,18 @@ const Chat = ({ chatId, token, user }) => {
   const [form, setForm] = useState("");
 
   // Use Effect
-  useEffect(()=>{
-    // Look for last message 
-    if(!loading){
+  useEffect(() => {
+    // Look for last message
+    if (!loading) {
       // const last = document.getElementById(messages[messages.length - 1].id);
       // last.scrollIntoView({})
       const chatDiv = document.getElementById("chatContainer");
       chatDiv.scrollTop = chatDiv.scrollHeight;
     }
-  }, [messages])
-
+  }, [messages]);
 
   // Handlers
+  console.log(user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,18 +49,18 @@ const Chat = ({ chatId, token, user }) => {
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
-        "Authorization": authHeader,
+        Authorization: authHeader,
       },
       data: {
-        text: form
+        text: form,
       },
-    }) 
-    .then(()=>{
-      setForm("");
     })
-    .catch(err => {
-      console.error(err);
-    })
+      .then(() => {
+        setForm("");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   const handleChange = (e) => {
@@ -79,19 +78,40 @@ const Chat = ({ chatId, token, user }) => {
             overflow: "scroll",
             overflowX: "hidden",
             maxHeight: "400px",
-            height: "400px"
+            height: "400px",
           }}
         >
+          {messages.length === 0 ? (
+            <div
+              className="container w-100 h-100"
+              style={{
+                position: "relative",
+              }}
+            >
+              <div className="center-item">
+                <h5 className="m-0 text-center" style={{ fontWeight: 400 }}>
+                  {" "}
+                  Send a first message!{" "}
+                </h5>
+              </div>
+            </div>
+          ) : null}
           {loading ? (
             <p> loading... </p>
           ) : (
             messages.map((message, index) => {
-
               return (
-                <div key={message.id} className="">
+                <div
+                  key={message.id}
+                  className={`d-flex ${
+                    message.handle === user.handle
+                      ? "justify-content-end"
+                      : null
+                  }`}
+                >
                   <div
-                    className="row card bg-info p-2 mt-1 d-flex shadow"
-                    style={{ width: "max-content", maxWidth: "300px"}}
+                    className="row card bg-info p-2 mt-1 shadow"
+                    style={{ width: "max-content", maxWidth: "300px" }}
                   >
                     <h6 className="text-white p-0 m-0">
                       {" "}
@@ -122,9 +142,9 @@ const Chat = ({ chatId, token, user }) => {
             value={form}
           />
         </form>
-          <button type="submit" className="btn btn-success mt-2" form="chatForm">
-            Send Message
-          </button>
+        <button type="submit" className="btn btn-success mt-2" form="chatForm">
+          Send Message
+        </button>
       </div>
     );
   } else {
