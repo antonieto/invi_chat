@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "axios";
+import axios from "axios";
 
 import {
   BrowserRouter as Router,
@@ -15,6 +15,7 @@ import Login from "./pages/Login";
 import NoUser from "./pages/NoUser";
 import SignUp from "./pages/SignUp.jsx";
 import Meeting from "./pages/Meeting";
+import { verifyToken } from "./util/api";
 
 function App() {
   // State de user
@@ -24,7 +25,15 @@ function App() {
   let history = useHistory();
 
   useEffect(() => {
-    console.log(history);
+    if (token)
+      verifyToken(token)
+        .then()
+        .catch((err) => {
+          if (err.response.status === 403) {
+            setToken(null);
+            setUser(null);
+          }
+        });
   }, [user]);
 
   if (!user) {

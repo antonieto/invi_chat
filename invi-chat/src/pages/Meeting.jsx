@@ -7,6 +7,8 @@ import { useParams, Link } from "react-router-dom";
 import { db } from "../util/firebaseConfig";
 import Loader from "../components/Loader";
 import Chat from "../components/Chat";
+import GuestsList from "../components/GuestsList";
+import MeetingInviForm from "../components/MeetingInviForm";
 
 const Meeting = ({ token, user }) => {
   const { meetingId } = useParams();
@@ -32,7 +34,7 @@ const Meeting = ({ token, user }) => {
     }
   }, [document]);
 
-  const [show, toggleShow] = useState("");
+  const [show, toggleShow] = useState("none");
 
   const handleToggle = () => {
     if (show === "none") toggleShow("block");
@@ -44,36 +46,21 @@ const Meeting = ({ token, user }) => {
       {!infoLoading ? (
         <div className="meeting container mt-4">
           <h1 className="text-center"> {data.title} </h1>
-          <Link to="/" className="btn my-4 btn-outline-danger">
+          <Link to="/" className="btn my-2 btn-outline-danger">
             &laquo; Home
           </Link>
 
-          <button className="btn mx-1 btn-primary" onClick={handleToggle}>
-            Add guest...
-          </button>
+          {user.handle === data.owner ? (
+            <button className="btn mx-1 btn-info" onClick={handleToggle}>
+              Send an invitation
+            </button>
+          ) : null}
 
           <div
             className="collapse mb-2"
             style={{ display: show, width: "max-content" }}
           >
-            <div className="card">
-              <div className="card-body">
-                <form action="">
-                  <div className="row">
-                    <div className="d-flex">
-                      <label
-                        htmlFor=""
-                        className="mx-2 my-0 bg-info p-2 rounded"
-                      >
-                        {" "}
-                        @{" "}
-                      </label>
-                      <input type="text" className="form-control mr-2" />
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
+            <MeetingInviForm meetingId={meetingId} token={token} />
           </div>
 
           <div className="row">
@@ -86,6 +73,8 @@ const Meeting = ({ token, user }) => {
                   </p>
                 </div>
               </div>
+              {/* Guests list */}
+              <GuestsList guests={data.guests} />
             </div>
             <div className="col-lg">
               {!infoLoading && data.chatId ? (

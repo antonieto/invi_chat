@@ -31,7 +31,6 @@ const Chat = ({ chatId, token, user }) => {
   }, [messages]);
 
   // Handlers
-  console.log(user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,7 +38,8 @@ const Chat = ({ chatId, token, user }) => {
     if (!form.trim()) {
       return;
     }
-    console.log(form);
+    const content = form;
+    setForm("");
     // Call api
     const url = `/chat/${chatId}`;
     const authHeader = "Bearer" + " " + token;
@@ -52,7 +52,7 @@ const Chat = ({ chatId, token, user }) => {
         Authorization: authHeader,
       },
       data: {
-        text: form,
+        text: content,
       },
     })
       .then(() => {
@@ -70,7 +70,6 @@ const Chat = ({ chatId, token, user }) => {
   if (messages && !loading) {
     return (
       <div>
-        <h3> Bienvenido al chat, {user.handle} </h3>
         <div
           id="chatContainer"
           className="card bg-dark p-4"
@@ -110,10 +109,16 @@ const Chat = ({ chatId, token, user }) => {
                   }`}
                 >
                   <div
-                    className="row card bg-info p-2 mt-1 shadow"
+                    className={`row card ${
+                      message.handle === user.handle ? "bg-light" : "bg-info"
+                    } p-2 mt-1 shadow`}
                     style={{ width: "max-content", maxWidth: "300px" }}
                   >
-                    <h6 className="text-white p-0 m-0">
+                    <h6
+                      className={`${
+                        message.handle === user.handle ? "" : "text-white"
+                      } p-0 m-0`}
+                    >
                       {" "}
                       <span style={{ fontWeight: "400" }}>
                         {" "}
@@ -142,7 +147,11 @@ const Chat = ({ chatId, token, user }) => {
             value={form}
           />
         </form>
-        <button type="submit" className="btn btn-success mt-2" form="chatForm">
+        <button
+          type="submit"
+          className="btn btn-block btn-success mt-2"
+          form="chatForm"
+        >
           Send Message
         </button>
       </div>
