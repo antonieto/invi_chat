@@ -17,6 +17,9 @@ import SignUp from "./pages/SignUp.jsx";
 import Meeting from "./pages/Meeting";
 import { verifyToken } from "./util/api";
 
+// Components
+import Nav from "./components/Nav";
+
 function App() {
   // State de user
   const [token, setToken] = useState(null);
@@ -56,6 +59,8 @@ function App() {
 
   return (
     <Router>
+      <Nav />
+      <Switch></Switch>
       <Route path="/" exact>
         <Dashboard user={user} token={token} />
       </Route>

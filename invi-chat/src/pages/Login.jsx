@@ -104,9 +104,7 @@ const Login = ({ setUser, setToken }) => {
               name=""
             />
           </div>
-          <div className="row">
-            {errors ? <Error message={errors} /> : null}
-          </div>
+          {errors ? <Error message={errors} /> : null}
         </form>
         <Link to="/" className="btn btn-outline-danger">
           &laquo; Back
