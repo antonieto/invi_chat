@@ -66,8 +66,8 @@ a:hover {
   color: gray;
 }
 .evento {
-  height: 16rem;
-  width: 16rem;
+  height: 14rem;
+  width: 12rem;
   margin-left: 2rem;
   margin-bottom: 2rem;
 }
@@ -151,4 +151,16 @@ a:hover {
   width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
+}
+.mapouter {
+  position: relative;
+  text-align: right;
+  height: 350px;
+  width: 500px;
+}
+.gmap_canvas {
+  overflow: hidden;
+  background: none !important;
+  height: 350px;
+  width: 500px;
 }

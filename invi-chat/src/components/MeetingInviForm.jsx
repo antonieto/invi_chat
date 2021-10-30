@@ -2,18 +2,28 @@ import React, { useState } from "react";
 import axios from "axios";
 import Loader from "./Loader";
 import Error from "./Error";
+import { Button, Modal, Alert, Spinner } from "react-bootstrap";
 
 const MeetingInviForm = ({ user, meetingId, token, handleToggle }) => {
   const [form, setForm] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const sendInvi = (e) => {
     e.preventDefault();
+    setError("");
     setLoading(true);
     if (!form.trim()) {
       setLoading(false);
       setError("Type something!");
+      setTimeout(() => {
+        setError("");
+      }, 2000);
       return;
     }
 
@@ -46,50 +56,68 @@ const MeetingInviForm = ({ user, meetingId, token, handleToggle }) => {
         setLoading(false);
         if (err.response.status === 403) {
           setError(`${content} is already invited!`);
+          setTimeout(() => {
+            setError("");
+          }, 2000);
         } else if (err.response.status === 404) {
           setError(err.response.data.error);
+          setTimeout(() => {
+            setError("");
+          }, 2000);
         }
       });
   };
 
-  if (loading) return <Loader />;
-  if (error == "success") {
-    return (
-      <div className="alert alert-success">Invitation sent successfully!</div>
-    );
-  }
-
   return (
-    <div className="d-flex align-items-center">
-      <div className="card mr-2">
-        <div className="card-body">
-          <form onSubmit={sendInvi}>
-            <div className="row">
-              <div className="d-flex">
-                <label htmlFor="" className="mx-2 my-0 bg-info p-2 rounded">
-                  {" "}
-                  @{" "}
-                </label>
-                <input
-                  type="text"
-                  value={form}
-                  className="form-control mr-2"
-                  onChange={(e) => {
-                    setForm(e.target.value);
-                  }}
-                />
-                <input
-                  type="submit"
-                  value="Invite"
-                  className="btn btn-success"
-                />
-              </div>
-            </div>
+    <>
+      <Button variant="primary" onClick={handleShow} className="mb-2">
+        Invite someone
+      </Button>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header>
+          <Modal.Title>Who else is coming?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form action="" id="inviForm" onSubmit={sendInvi}>
+            <input
+              type="text"
+              className="form-control bg-secondary text-white"
+              value={form}
+              onChange={(e) => {
+                setForm(e.target.value);
+              }}
+            />
+
+            {loading ? (
+              <Spinner animation="border" className="mt-4 mx-auto" />
+            ) : null}
+
+            {error && error === "success" ? (
+              <Alert variant="success" className="mt-3 mb-0">
+                {" "}
+                Invitation sent successfully!{" "}
+              </Alert>
+            ) : null}
+
+            {error && error !== "success" ? (
+              <Alert variant="danger" className="mt-3 mb-0">
+                {" "}
+                {error}{" "}
+              </Alert>
+            ) : null}
           </form>
-        </div>
-      </div>
-      <Error message={error} />
-    </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button variant="success" type="submit" form="inviForm">
+            Send
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 };
 

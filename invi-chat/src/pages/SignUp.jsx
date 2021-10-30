@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Error from "../components/Error";
 import Loader from "../components/Loader";
 
@@ -13,6 +13,8 @@ const SignUp = ({ setToken, setUser }) => {
   });
   const [errors, setErrors] = useState("");
   const [loading, setLoading] = useState(false);
+
+  let history = useHistory();
 
   const callSignUp = () => {
     return axios.post("/signup", {
@@ -47,6 +49,7 @@ const SignUp = ({ setToken, setUser }) => {
           console.log(response);
           setToken(response.data.token);
           setUser(response.data.data);
+          history.push("/");
           setLoading(false);
         }
       })

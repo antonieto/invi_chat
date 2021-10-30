@@ -9,6 +9,9 @@ import Loader from "../components/Loader";
 import Chat from "../components/Chat";
 import GuestsList from "../components/GuestsList";
 import MeetingInviForm from "../components/MeetingInviForm";
+import Map from "../components/Map";
+
+import { Spinner } from "react-bootstrap";
 
 const Meeting = ({ token, user }) => {
   const { meetingId } = useParams();
@@ -25,6 +28,7 @@ const Meeting = ({ token, user }) => {
     description: "",
     owner: "",
     chatId: "",
+    location: "",
     guests: [],
   });
 
@@ -34,64 +38,51 @@ const Meeting = ({ token, user }) => {
     }
   }, [document]);
 
-  const [show, toggleShow] = useState("none");
+  if (infoLoading) {
+    return <Spinner variant="border"></Spinner>;
+  } else
+    return (
+      <div className="output">
+        {!infoLoading ? (
+          <div className="meeting container mt-4">
+            <h1 className="text-center border-bottom pb-4 mb-4 border-secondary">
+              {" "}
+              {data.title}{" "}
+            </h1>
+            {user.handle === data.owner ? (
+              <MeetingInviForm
+                meetingId={meetingId}
+                token={token}
+                user={user}
+              />
+            ) : null}
 
-  const handleToggle = () => {
-    if (show === "none") toggleShow("block");
-    if (show === "block") toggleShow("none");
-  };
-
-  return (
-    <div className="output">
-      {!infoLoading ? (
-        <div className="meeting container mt-4">
-          <h1 className="text-center"> {data.title} </h1>
-          <Link to="/" className="btn my-2 btn-outline-danger">
-            &laquo; Home
-          </Link>
-
-          {user.handle === data.owner ? (
-            <button className="btn mx-1 btn-info" onClick={handleToggle}>
-              Send an invitation
-            </button>
-          ) : null}
-
-          <div
-            className="collapse mb-2"
-            style={{ display: show, width: "max-content" }}
-          >
-            <MeetingInviForm
-              meetingId={meetingId}
-              token={token}
-              handleToggle={handleToggle}
-            />
-          </div>
-
-          <div className="row">
-            <div className="col-lg mb-4">
-              <div className="card">
-                <div className="card-body">
-                  <p>{data.description}</p>
-                  <p>
-                    <strong> Date </strong> {data.createdAt}
-                  </p>
+            <div className="row">
+              <div className="col-lg mb-4">
+                <Map query={data.location} />
+                <div className="card">
+                  <div className="card-body">
+                    <p>{data.description}</p>
+                    <p>
+                      <strong> Date </strong> {data.createdAt}
+                    </p>
+                  </div>
                 </div>
+                {/* Guests list */}
+                <GuestsList guests={data.guests} />
               </div>
-              {/* Guests list */}
-              <GuestsList guests={data.guests} />
-            </div>
-            <div className="col-lg">
-              {!infoLoading && data.chatId ? (
-                <Chat chatId={data.chatId} token={token} user={user} />
-              ) : null}
+              <div className="col-lg">
+                {!infoLoading && data.chatId ? (
+                  <Chat chatId={data.chatId} token={token} user={user} />
+                ) : null}
+              </div>
             </div>
           </div>
-        </div>
-      ) : (
-        <Loader />
-      )}
-    </div>
-  );
+        ) : (
+          <Spinner animation="border center-item" />
+        )}
+      </div>
+    );
 };
 
 export default Meeting;

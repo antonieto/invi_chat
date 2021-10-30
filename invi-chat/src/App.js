@@ -19,6 +19,7 @@ import { verifyToken } from "./util/api";
 
 // Components
 import Nav from "./components/Nav";
+import NewMeeting from "./pages/NewMeeting";
 
 function App() {
   // State de user
@@ -67,6 +68,9 @@ function App() {
 
       <Route path="/meeting/:meetingId" exact>
         <Meeting token={token} user={user} />
+      </Route>
+      <Route path="/newMeeting" exact>
+        <NewMeeting user={user} token={token} />
       </Route>
     </Router>
   );

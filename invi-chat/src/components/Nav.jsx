@@ -1,48 +1,31 @@
 import React from "react";
-
+import { Navbar, Container, Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const Nav = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-info shadow">
-      <div className="container-fluid">
-        <a href="#" className="navbar-brand">
-          <h4 className="text-white">Invi Chat</h4>
-        </a>
-        <div className="d-flex">
-          <div class="dropdown">
-            <a
-              class="btn btn-secondary dropdown-toggle"
-              href="#"
-              role="button"
-              id="dropdownMenuLink"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Notifications 🔔
-            </a>
+    <Navbar bg="primary" expand="lg" className="shadow">
+      <Container>
+        <Navbar.Brand>
+          <Link to="/">
+            <h3 className="text-white">Invi-Chat</h3>
+          </Link>
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav"></Navbar.Collapse>
+        <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            Dropdown Button
+          </Dropdown.Toggle>
 
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <li>
-                <a class="dropdown-item" href="#">
-                  Action
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">
-                  Another action
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">
-                  Something else here
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </nav>
+          <Dropdown.Menu>
+            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      </Container>
+    </Navbar>
   );
 };
 

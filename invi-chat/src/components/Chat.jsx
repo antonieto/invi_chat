@@ -110,7 +110,7 @@ const Chat = ({ chatId, token, user }) => {
                 >
                   <div
                     className={`row card ${
-                      message.handle === user.handle ? "bg-light" : "bg-info"
+                      message.handle === user.handle ? "bg-primary" : "bg-info"
                     } p-2 mt-1 shadow`}
                     style={{ width: "max-content", maxWidth: "300px" }}
                   >
