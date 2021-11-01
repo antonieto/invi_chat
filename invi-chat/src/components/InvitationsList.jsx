@@ -19,7 +19,7 @@ const InvitationsList = ({ user, token }) => {
     console.log(token);
     axios({
       method: "POST",
-      url: `/meeting/accept/${id}`,
+      url: `https://us-central1-invi-chat.cloudfunctions.net/api/meeting/accept/${id}`,
       headers: {
         Authorization: `Bearer ${token}`,
         "Access-Control-Allow-Origin": "*",

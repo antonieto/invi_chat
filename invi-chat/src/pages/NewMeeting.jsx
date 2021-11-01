@@ -41,7 +41,7 @@ const NewMeeting = ({ token, user }) => {
     // Call the API
     axios({
       method: "POST",
-      url: "/meeting",
+      url: "https://us-central1-invi-chat.cloudfunctions.net/api/meeting",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -71,10 +71,10 @@ const NewMeeting = ({ token, user }) => {
   return (
     <div className="container p-4">
       <div className="row">
-        <div className="col md">
+        <div className="col-lg">
           <MapForm setNewMeeting={setNewMeeting} newMeeting={newMeeting} />
         </div>
-        <div className="col md">
+        <div className="col-lg">
           <Form onSubmit={handleSubmit} className="mb-3">
             <Form.Group className="mb-3">
               <Form.Label> Title of the meeting </Form.Label>

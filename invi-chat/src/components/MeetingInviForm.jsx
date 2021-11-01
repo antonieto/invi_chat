@@ -31,7 +31,7 @@ const MeetingInviForm = ({ user, meetingId, token, handleToggle }) => {
     setForm("");
 
     // Validation passed, calling the api
-    const url = `/meeting/invite/${meetingId}`;
+    const url = `https://us-central1-invi-chat.cloudfunctions.net/api/meeting/invite/${meetingId}`;
     const authHeader = "Bearer" + " " + token;
     axios({
       method: "POST",

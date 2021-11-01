@@ -41,7 +41,7 @@ const Chat = ({ chatId, token, user }) => {
     const content = form;
     setForm("");
     // Call api
-    const url = `/chat/${chatId}`;
+    const url = `https://us-central1-invi-chat.cloudfunctions.net/api/chat/${chatId}`;
     const authHeader = "Bearer" + " " + token;
     axios({
       method: "POST",

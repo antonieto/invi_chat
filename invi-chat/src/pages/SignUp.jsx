@@ -17,16 +17,19 @@ const SignUp = ({ setToken, setUser }) => {
   let history = useHistory();
 
   const callSignUp = () => {
-    return axios.post("/signup", {
-      Headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      email: formData.email,
-      password: formData.password,
-      confirmPassword: formData.confirmPassword,
-      handle: formData.handle,
-    });
+    return axios.post(
+      "https://us-central1-invi-chat.cloudfunctions.net/api/signup",
+      {
+        Headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        email: formData.email,
+        password: formData.password,
+        confirmPassword: formData.confirmPassword,
+        handle: formData.handle,
+      }
+    );
   };
 
   const handleSubmit = (e) => {

@@ -27,7 +27,7 @@ const NoUser = () => {
         </nav>
       </header>
       <main className="mt-4">
-        <div className="container-fluid w-50" style={{ minWidth: "500px" }}>
+        <div className="container" style={{ maxWidth: "800px" }}>
           <div className="card bg-dark mb-2">
             <div className="card-header">
               <h3 className="card-title text-center m-0">

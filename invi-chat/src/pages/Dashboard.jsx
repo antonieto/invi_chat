@@ -30,9 +30,11 @@ const Dashboard = ({ user, token }) => {
             ) : (
               meetings.docs.map((doc) => {
                 return (
-                  <Link to={`/meeting/${doc.id}`} key={doc.id}>
-                    <Card info={doc.data()} />
-                  </Link>
+                  <div className="card evento shadow bg-dark text-white w-100 h-100 mb-2 mx-2">
+                    <Link to={`/meeting/${doc.id}`} key={doc.id}>
+                      <Card info={doc.data()} />
+                    </Link>
+                  </div>
                 );
               })
             )}

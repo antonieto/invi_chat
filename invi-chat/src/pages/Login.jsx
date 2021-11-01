@@ -20,7 +20,7 @@ const Login = ({ setUser, setToken }) => {
 
   const callLogin = () => {
     axios
-      .post("/login", {
+      .post("https://us-central1-invi-chat.cloudfunctions.net/api/login", {
         Headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
