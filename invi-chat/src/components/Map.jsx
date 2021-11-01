@@ -3,13 +3,11 @@ import React from "react";
 const Map = ({ query }) => {
   let url;
   if (!query) {
-    url =
-      "https://www.google.com/maps/embed/v1/place?key=AIzaSyCyddp2vs8JJfytLxDy5t3tQswv1TT1WwE&q=Bering+Strait";
+    url = `https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_MAPS_KEY}&q=Bering+Strait`;
   } else {
-    url = `https://www.google.com/maps/embed/v1/place?key=AIzaSyCyddp2vs8JJfytLxDy5t3tQswv1TT1WwE&q=${query.replace(
-      " ",
-      "+"
-    )}`;
+    url = `https://www.google.com/maps/embed/v1/place?key=${
+      process.env.REACT_APP_MAPS_KEY
+    }&q=${query.replace(" ", "+")}`;
   }
 
   return (
