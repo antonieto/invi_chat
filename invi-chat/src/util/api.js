@@ -20,7 +20,7 @@ const verifyToken = (token) => {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
     },
-    url: "/verifyToken",
+    url: "https://us-central1-invi-chat.cloudfunctions.net/api/verifyToken",
   });
 };
 

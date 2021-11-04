@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   useCollection,
   useCollectionData,
 } from "react-firebase-hooks/firestore";
 import { db } from "../util/firebaseConfig";
 import Loader from "./Loader";
-import { Button, Form } from "react-bootstrap";
+import { Alert, Button, Form, Spinner } from "react-bootstrap";
 import axios from "axios";
+
+import InvitationCard from "./InvitationCard";
 
 const InvitationsList = ({ user, token }) => {
   const [invitations, loadingInvitations, error] = useCollection(
@@ -15,8 +17,8 @@ const InvitationsList = ({ user, token }) => {
 
   const acceptInvi = (id) => {
     // Call API
-    console.log(id);
-    console.log(token);
+    console.log("Accepting invitation");
+    // console.log(form);
     axios({
       method: "POST",
       url: `https://us-central1-invi-chat.cloudfunctions.net/api/meeting/accept/${id}`,
@@ -35,23 +37,22 @@ const InvitationsList = ({ user, token }) => {
   return (
     <>
       <h4 className="mb-2">Your invitations</h4>
+      {!loadingInvitations && !error && !invitations.docs.length ? (
+        <p className="text-muted"> You'll see invitations here </p>
+      ) : null}
       <ul className="list-group">
         {!loadingInvitations && !error ? (
           invitations.docs.map((doc) => (
-            <li className="list-group-item" key={doc.id}>
-              <div className="d-flex justify-content-between">
-                <h4>{doc.data().from}</h4>
-                <Form onSubmit={acceptInvi(doc.id)}>
-                  <Button variant="success" type="submit">
-                    {" "}
-                    Accept{" "}
-                  </Button>
-                </Form>
-              </div>
-            </li>
+            <InvitationCard
+              meetingId={doc.data().eventId}
+              token={token}
+              invitationId={doc.id}
+            />
           ))
         ) : (
-          <Loader />
+          <div className="center-item mt-5">
+            <Spinner animation="border" />
+          </div>
         )}
       </ul>
     </>

@@ -28,14 +28,14 @@ const NoUser = () => {
       </header>
       <main className="mt-4">
         <div className="container" style={{ maxWidth: "800px" }}>
-          <div className="card bg-dark mb-2">
+          <div className="card mb-2 shadow">
             <div className="card-header">
               <h3 className="card-title text-center m-0">
                 {" "}
                 What is Invi Chat?
               </h3>
             </div>
-            <div className="card-body text-white">
+            <div className="card-body">
               <p className="">
                 Invi Chat is an open source social media app developed using{" "}
                 <strong> React.js</strong> for the frontend and{" "}
@@ -71,7 +71,7 @@ const NoUser = () => {
               <p></p>
             </div>
           </div>
-          <div className="card bg-dark mb-2">
+          <div className="card mb-2 shadow">
             <div className="card-header">
               <h3 className="card-title text-center m-0"> What is it for?</h3>
             </div>
@@ -81,7 +81,7 @@ const NoUser = () => {
                 to any kind of meeting. Using Invi Chat you can create meetings,
                 invite your friends, chat with them and keep your guests up to
                 date for the meeting. Don't have an account yet? Go ahead and
-                create one in less than one minute.
+                create one in less than one minute!
               </p>
             </div>
           </div>

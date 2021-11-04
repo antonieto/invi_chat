@@ -116,7 +116,9 @@ const Chat = ({ chatId, token, user }) => {
                   >
                     <h6
                       className={`${
-                        message.handle === user.handle ? "" : "text-white"
+                        message.handle === user.handle
+                          ? "text-white"
+                          : "text-white"
                       } p-0 m-0`}
                     >
                       {" "}

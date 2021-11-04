@@ -60,7 +60,7 @@ function App() {
 
   return (
     <Router>
-      <Nav />
+      <Nav setUser={setUser} setToken={setToken} />
       <Switch></Switch>
       <Route path="/" exact>
         <Dashboard user={user} token={token} />

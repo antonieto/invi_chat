@@ -31,35 +31,35 @@ const NewMeeting = ({ token, user }) => {
       !newMeeting.description.trim() ||
       !newMeeting.location.trim()
     ) {
+      setLoading(false);
       setError("All fields are required!");
       setTimeout(() => {
         setError(false);
       }, 2000);
       return;
-    }
-
-    // Call the API
-    axios({
-      method: "POST",
-      url: "https://us-central1-invi-chat.cloudfunctions.net/api/meeting",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      data: newMeeting,
-    })
-      .then((response) => {
-        setLoading(false);
-        history.push(`/meeting/${response.data.eventId}`);
+    } else {
+      axios({
+        method: "POST",
+        url: "https://us-central1-invi-chat.cloudfunctions.net/api/meeting",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        data: newMeeting,
       })
-      .catch((err) => {
-        setLoading(false);
-        setError("Something went wrong");
-        setTimeout(() => {
-          setError("");
+        .then((response) => {
+          setLoading(false);
+          history.push(`/meeting/${response.data.eventId}`);
+        })
+        .catch((err) => {
+          setLoading(false);
+          setError("Something went wrong");
+          setTimeout(() => {
+            setError("");
+          });
         });
-      });
+    }
   };
 
   if (loading)
@@ -75,9 +75,10 @@ const NewMeeting = ({ token, user }) => {
           <MapForm setNewMeeting={setNewMeeting} newMeeting={newMeeting} />
         </div>
         <div className="col-lg">
+          <h3>Details</h3>
           <Form onSubmit={handleSubmit} className="mb-3">
             <Form.Group className="mb-3">
-              <Form.Label> Title of the meeting </Form.Label>
+              <Form.Label> Title </Form.Label>
               <Form.Control
                 onChange={handleChange}
                 type="text"

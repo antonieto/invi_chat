@@ -22,15 +22,17 @@ const Dashboard = ({ user, token }) => {
 
   return (
     <div className="container mt-4">
-      <div className="row">
+      <div className="row m-0">
         <Col sm={8}>
-          <div className="row">
+          <div className="row m-0">
             {loadingMeetings ? (
-              <Spinner animation="border" />
+              <div className="center-item">
+                <Spinner animation="border" />
+              </div>
             ) : (
               meetings.docs.map((doc) => {
                 return (
-                  <div className="card evento shadow bg-dark text-white w-100 h-100 mb-2 mx-2">
+                  <div className="card evento shadow w-100 h-100 mb-2">
                     <Link to={`/meeting/${doc.id}`} key={doc.id}>
                       <Card info={doc.data()} />
                     </Link>

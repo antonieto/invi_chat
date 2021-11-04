@@ -2,7 +2,14 @@ import React, { useState } from "react";
 import axios from "axios";
 import Loader from "./Loader";
 import Error from "./Error";
-import { Button, Modal, Alert, Spinner } from "react-bootstrap";
+import {
+  Button,
+  Modal,
+  Alert,
+  Spinner,
+  InputGroup,
+  FormControl,
+} from "react-bootstrap";
 
 const MeetingInviForm = ({ user, meetingId, token, handleToggle }) => {
   const [form, setForm] = useState("");
@@ -80,14 +87,17 @@ const MeetingInviForm = ({ user, meetingId, token, handleToggle }) => {
         </Modal.Header>
         <Modal.Body>
           <form action="" id="inviForm" onSubmit={sendInvi}>
-            <input
-              type="text"
-              className="form-control bg-secondary text-white"
-              value={form}
-              onChange={(e) => {
-                setForm(e.target.value);
-              }}
-            />
+            <InputGroup>
+              <InputGroup.Text id="basicAt">@</InputGroup.Text>
+              <FormControl
+                placeholder="Username"
+                aria-describedby="basicAt"
+                value={form}
+                onChange={(e) => {
+                  setForm(e.target.value);
+                }}
+              />
+            </InputGroup>
 
             {loading ? (
               <Spinner animation="border" className="mt-4 mx-auto" />
@@ -110,7 +120,7 @@ const MeetingInviForm = ({ user, meetingId, token, handleToggle }) => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="danger" onClick={handleClose}>
-            Cancel
+            Done
           </Button>
           <Button variant="success" type="submit" form="inviForm">
             Send

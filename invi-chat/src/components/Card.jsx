@@ -9,7 +9,7 @@ const Card = ({ info }) => {
           <h5> {info.title} </h5>
         </div>
       </div>
-      <div className="card-body text-white">
+      <div className="card-body">
         <p> {info.createdAt} </p>
       </div>
       {/* <p> {info.description} </p> */}

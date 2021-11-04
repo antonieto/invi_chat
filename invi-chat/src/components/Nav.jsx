@@ -1,8 +1,17 @@
 import React from "react";
-import { Navbar, Container, Dropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Navbar, Container, Dropdown, Button } from "react-bootstrap";
+import { Link, useHistory } from "react-router-dom";
 
-const Nav = () => {
+const Nav = ({ setToken, setUser }) => {
+  let history = useHistory();
+
+  const logOut = () => {
+    // Setting states
+    setToken(null);
+    setUser(null);
+    history.push("/");
+  };
+
   return (
     <Navbar bg="primary" expand="lg" className="shadow">
       <Container>
@@ -13,17 +22,11 @@ const Nav = () => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav"></Navbar.Collapse>
-        <Dropdown>
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
-            Dropdown Button
-          </Dropdown.Toggle>
 
-          <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+        <Button variant="danger" onClick={logOut}>
+          {" "}
+          LogOut{" "}
+        </Button>
       </Container>
     </Navbar>
   );

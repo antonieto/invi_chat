@@ -158,3 +158,11 @@ a:hover {
   height: 350px;
   width: 500px;
 }
+
+a {
+  color: inherit;
+}
+
+.admin-util > * {
+  margin-right: 1rem;
+}

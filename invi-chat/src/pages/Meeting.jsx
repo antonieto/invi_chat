@@ -3,15 +3,18 @@ import {
   useCollectionData,
   useDocumentData,
 } from "react-firebase-hooks/firestore";
-import { useParams, Link } from "react-router-dom";
+import axios from "axios";
+import { useParams, Link, useHistory } from "react-router-dom";
 import { db } from "../util/firebaseConfig";
+
 import Loader from "../components/Loader";
 import Chat from "../components/Chat";
 import GuestsList from "../components/GuestsList";
 import MeetingInviForm from "../components/MeetingInviForm";
 import Map from "../components/Map";
 
-import { Spinner } from "react-bootstrap";
+import { Spinner, Dropdown } from "react-bootstrap";
+import DropdownMenu from "@restart/ui/esm/DropdownMenu";
 
 const Meeting = ({ token, user }) => {
   const { meetingId } = useParams();
@@ -19,6 +22,10 @@ const Meeting = ({ token, user }) => {
   const [document, infoLoading, error] = useDocumentData(
     db.doc(`/events/${meetingId}`)
   );
+
+  const [loading, setLoading] = useState(false);
+
+  let history = useHistory();
 
   let messages, loadingMessages, errorMessages;
 
@@ -32,14 +39,37 @@ const Meeting = ({ token, user }) => {
     guests: [],
   });
 
+  const deleteMeeting = () => {
+    setLoading(true);
+    axios({
+      method: "DELETE",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        Authorization: `Bearer ${token}`,
+      },
+      url: `https://us-central1-invi-chat.cloudfunctions.net/api/meeting/delete/${meetingId}`,
+    })
+      .then((res) => {
+        setLoading(false);
+        history.push("/");
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  };
+
   useEffect(() => {
     if (!infoLoading && !error) {
       setData(document);
     }
   }, [document]);
 
-  if (infoLoading) {
-    return <Spinner variant="border"></Spinner>;
+  if (infoLoading || loading) {
+    return (
+      <div className="center-item">
+        <Spinner animation="border"></Spinner>
+      </div>
+    );
   } else
     return (
       <div className="output">
@@ -50,11 +80,24 @@ const Meeting = ({ token, user }) => {
               {data.title}{" "}
             </h1>
             {user.handle === data.owner ? (
-              <MeetingInviForm
-                meetingId={meetingId}
-                token={token}
-                user={user}
-              />
+              <div className="d-flex admin-util">
+                <MeetingInviForm
+                  meetingId={meetingId}
+                  token={token}
+                  user={user}
+                />
+                <Dropdown>
+                  <Dropdown.Toggle variant="secondary" id="settings-dropdown">
+                    {" "}
+                    Settings{" "}
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item>
+                      <a onClick={deleteMeeting}>Delete meeting</a>
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
             ) : null}
 
             <div className="row">
