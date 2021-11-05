@@ -9,6 +9,7 @@ import {
   Spinner,
   InputGroup,
   FormControl,
+  ButtonGroup,
 } from "react-bootstrap";
 
 const MeetingInviForm = ({ user, meetingId, token, handleToggle }) => {
@@ -119,12 +120,14 @@ const MeetingInviForm = ({ user, meetingId, token, handleToggle }) => {
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={handleClose}>
-            Done
-          </Button>
-          <Button variant="success" type="submit" form="inviForm">
-            Send
-          </Button>
+          <ButtonGroup>
+            <Button variant="outline-primary" onClick={handleClose}>
+              Done
+            </Button>
+            <Button variant="primary" type="submit" form="inviForm">
+              Send
+            </Button>
+          </ButtonGroup>
         </Modal.Footer>
       </Modal>
     </>

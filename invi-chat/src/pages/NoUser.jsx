@@ -4,7 +4,7 @@ const NoUser = () => {
   return (
     <>
       <header className="no-user_header">
-        <nav className="navbar navbar-expand-lg navbar-light bg-info">
+        <nav className="navbar navbar-expand-lg navbar-light bg-primary">
           <div className="container-fluid">
             <a href="#" className="navbar-brand">
               <h4 className="text-white">Invi Chat</h4>

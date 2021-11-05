@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar, Container, Dropdown, Button } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
+import { auth } from "../util/firebaseConfig";
 
 const Nav = ({ setToken, setUser }) => {
   let history = useHistory();
@@ -9,7 +10,9 @@ const Nav = ({ setToken, setUser }) => {
     // Setting states
     setToken(null);
     setUser(null);
-    history.push("/");
+    auth.signOut().then(() => {
+      history.push("/");
+    });
   };
 
   return (
@@ -25,7 +28,7 @@ const Nav = ({ setToken, setUser }) => {
 
         <Button variant="danger" onClick={logOut}>
           {" "}
-          LogOut{" "}
+          Sign Out{" "}
         </Button>
       </Container>
     </Navbar>

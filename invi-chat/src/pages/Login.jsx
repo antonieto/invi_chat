@@ -3,6 +3,8 @@ import Error from "../components/Error";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 
+import { auth } from "../util/firebaseConfig";
+
 const Login = ({ setUser, setToken }) => {
   const [formData, setFormData] = useState({
     email: "",
@@ -31,7 +33,11 @@ const Login = ({ setUser, setToken }) => {
       .then((response) => {
         setToken(response.data.token.trim());
         setUser(response.data.data);
-        history.push("/");
+        auth
+          .signInWithEmailAndPassword(formData.email, formData.password)
+          .then((credential) => {
+            history.push("/");
+          });
       })
       .catch((err) => {
         setLoading(false);
@@ -70,8 +76,8 @@ const Login = ({ setUser, setToken }) => {
     return <div className="loader"> Loading... </div>;
   }
   return (
-    <div className="col">
-      <div className="card row center-item shadow p-3 bg-body rounded">
+    <div className="col center-item" style={{ width: "350px" }}>
+      <div className="card row  shadow p-3 bg-body rounded">
         <h1 className="fs-1 text-center">Login</h1>
         <form className="col" onSubmit={handleFormSubmit} method="POST">
           <label className="row mb-3">

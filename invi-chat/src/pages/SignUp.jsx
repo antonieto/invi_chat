@@ -77,8 +77,8 @@ const SignUp = ({ setToken, setUser }) => {
   };
 
   return (
-    <div className="col">
-      <div className="card row center-item shadow p-3 mb-5 bg-body rounded">
+    <div className="col center-item" style={{ width: "350px" }}>
+      <div className="card row shadow p-3 mb-5 bg-body rounded">
         <h1 className="fs-1 text-center">Sign Up</h1>
         <form
           className="col"

@@ -12,6 +12,7 @@ import Chat from "../components/Chat";
 import GuestsList from "../components/GuestsList";
 import MeetingInviForm from "../components/MeetingInviForm";
 import Map from "../components/Map";
+import NotFound from "./NotFound";
 
 import { Spinner, Dropdown } from "react-bootstrap";
 import DropdownMenu from "@restart/ui/esm/DropdownMenu";
@@ -58,6 +59,8 @@ const Meeting = ({ token, user }) => {
       });
   };
 
+  console.log(error);
+
   useEffect(() => {
     if (!infoLoading && !error) {
       setData(document);
@@ -70,10 +73,18 @@ const Meeting = ({ token, user }) => {
         <Spinner animation="border"></Spinner>
       </div>
     );
+  } else if (error) {
+    return (
+      <div className="center-item">
+        <h4 className="alert alert-primary">Something went wrong</h4>
+      </div>
+    );
+  } else if (!document) {
+    return <NotFound />;
   } else
     return (
       <div className="output">
-        {!infoLoading ? (
+        {!infoLoading && !error ? (
           <div className="meeting container mt-4">
             <h1 className="text-center border-bottom pb-4 mb-4 border-secondary">
               {" "}

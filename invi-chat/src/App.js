@@ -16,10 +16,12 @@ import NoUser from "./pages/NoUser";
 import SignUp from "./pages/SignUp.jsx";
 import Meeting from "./pages/Meeting";
 import { verifyToken } from "./util/api";
-
+import NotFound from "./pages/NotFound";
 // Components
 import Nav from "./components/Nav";
 import NewMeeting from "./pages/NewMeeting";
+
+// Firebase imports
 
 function App() {
   // State de user
@@ -43,15 +45,18 @@ function App() {
   if (!user) {
     return (
       <Router>
-        <Route path="/" exact>
-          <NoUser />
-        </Route>
-        <Route path="/login" exact>
-          <Login setToken={setToken} setUser={setUser} />
-        </Route>
-        <Route path="/signup" exact>
-          <SignUp setToken={setToken} setUser={setUser} />
-        </Route>
+        <Switch>
+          <Route path="/" exact>
+            <NoUser />
+          </Route>
+          <Route path="/login" exact>
+            <Login setToken={setToken} setUser={setUser} />
+          </Route>
+          <Route path="/signup" exact>
+            <SignUp setToken={setToken} setUser={setUser} />
+          </Route>
+          <Route component={NotFound} />
+        </Switch>
       </Router>
     );
   }
