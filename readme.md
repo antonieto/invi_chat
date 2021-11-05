@@ -19,10 +19,25 @@ User authentication is a big challenge in any kind of project. However, Firebase
 ### SignUp 
 Taking advantage of the same firebase native library of authentication, we can create new users via an email and a passwrod.
 
+### Dashboard 
+The dashboard shows all the meetings that any user is attending, as well as any incoming invitation.
+
+<img src="images/dashboard_sample.png" alt="Dashboard example" width="800"/>
+
 ### Create Meeting
+<img src="images/new_meeting.png" alt="Creating a new meeting" width="800"/>
 
 ### Invite Someone
+<img src="images/Invited.png" alt="Inviting Someone" width="500"/>
+
+### Meeting 
+This is the page that shows all details of a meeting, as well as a chat where all of the guests can interact. 
+
+<img src="images/meeting_sample.png" alt="Meeting page" width="800"> 
 
 ### Chat 
 
-The real time chat is made possible by the use of firestore, the database available in Firebase. This database allows developers to synchronously query data from the database. This is made even simpler with the use of a library called **react-firebase-hooks**. 
+The real time chat is made possible by the use of firestore, the database available in Firebase. This database allows developers to synchronously query data from the database. This is made even simpler with the use of a library called **react-firebase-hooks**.  
+
+<img src="images/chat_sample.png" alt="Chat example" width="400"/>
+
