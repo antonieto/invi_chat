@@ -16,8 +16,12 @@ The home page is basically just a static html page showing off a basic descripti
 ### Log In 
 User authentication is a big challenge in any kind of project. However, Firebase makes user authentication possible with just a few lines of code. With an implementation of Firebase's native authentication library inside an API, it is possible to authenticate users via an email and password.
 
+<img src="images/login.png" alt="Login example" width="350"/>
+
 ### SignUp 
 Taking advantage of the same firebase native library of authentication, we can create new users via an email and a passwrod.
+
+<img src="images/signup.png" alt="sign up example" width="350"/>
 
 ### Dashboard 
 The dashboard shows all the meetings that any user is attending, as well as any incoming invitation.
