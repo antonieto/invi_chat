@@ -3,7 +3,7 @@
 [Link to Invi-Chat](https://invi-chat.web.app/)
 
 ## What is invi chat? 
-Invi-Chat is a web application, made with **React.js** for the user interface, and **Firebase** for the backend (with the use of Node.js serverless functions). 
+Invi-Chat is a web application, made with **React.js** for the user interface, and **Firebase** for the backend (with the use of Node.js cloud functions). 
 
 With Invi-Chat, you can create meetings of any kind, select a location and a time for it, and invite as many of your friends as you want. You can describe the meeting and specify any details for your meeting.  
 
